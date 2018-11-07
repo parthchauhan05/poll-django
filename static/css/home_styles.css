@@ -1,0 +1,16 @@
+h1, h3 {
+    color: mistyrose;
+}
+
+body{
+    background-image: url('../img/Aurora-Background-HD.jpg');
+    background-size: 100%;
+
+    opacity: 20%;
+    font-family: "Ubuntu";
+}
+
+#home-content{
+    text-align: center;
+    padding-top: 20%;
+}

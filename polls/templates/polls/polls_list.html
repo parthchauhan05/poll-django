@@ -1,0 +1,47 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block title %}Poll | Poll list{% endblock %}
+{% block custom_css %}<link rel="stylesheet" type="text/css" href="{% static 'css/list_style.css' %}">{% endblock %}
+{% block content %}
+    <div class="container">
+        <br>
+        <center><h1 class="title-font">WELCOME TO POLL LIST</h1></center>
+        <hr/>
+        <ul class="list-group">
+        {% for poll in polls %}
+            <li>
+            <span class="list-group-item">
+                <div class="card">
+
+                    <!-- Card content -->
+                    <div class="card-body">
+                        <div class="row">
+                        <div class="col-md-8">
+                        <!-- Title -->
+                        <h4 class="card-title">{{ poll | capfirst }}
+
+                        </h4>
+                        </div>
+                            <div class="col-md-2">
+                                {% for choice in poll.choice_set.all %}
+                                    <h5><span class="badge badge-default badge-pill">{{ choice.choice_text }}: {{ choice.votes }}</span></h5>
+                                {% endfor %}
+                            </div>
+                        <!-- Button -->
+                        <div class="col-md-2">
+                        <a href="{% url 'polls:detail' poll.id %}" class="btn btn-indigo btn-rounded">View</a>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+{#            <span class="list-group-item"><a href="{% url 'polls:detail' poll.id %}"> {{ poll | capfirst}} </a>#}
+{#            {% for choice in poll.choice_set.all %}#}
+{#                <span class="badge badge-default badge-pill">{{ choice.choice_text }}</span>#}
+{#            {% endfor %}#}
+            </span>
+            </li>
+        {% endfor %}
+        </ul>
+    </div>
+{% endblock %}

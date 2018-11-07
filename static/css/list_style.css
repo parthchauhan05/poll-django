@@ -1,0 +1,18 @@
+.title-font{
+    font-family: inherit;
+    font-size: 52px;
+}
+
+li{
+    list-style: none;
+}
+
+.list-group-item{
+    border: 0px;
+}
+
+h4{
+    align-items: center;
+    display: flex;
+    height: 90%;
+}

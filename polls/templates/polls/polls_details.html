@@ -1,0 +1,53 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block title %}Poll | {{ poll.text | capfirst }} {% endblock %}
+
+{% block content %}
+    <br>
+    <br>
+    <center>
+    <form action="{% url 'polls:poll_vote' poll.id %}" method="post">
+    {% csrf_token %}
+    <div class="col-md-5">
+    <div class="card">
+        <div class="card-body">
+            <!-- Title -->
+            <h4 class="card-title">{{ poll.text | title}}</h4>
+            <!-- Text -->
+            <p class="card-text">
+                <div class="row">
+                    <div class="col-lg-4"></div>
+                        {% for choice in poll.choice_set.all %}
+                            <div class="col-sm-2">
+                                <input type="radio" name="choice" id="choice{{ forloop.counter }}" value="{{ choice.id }}">
+                                <label for="choice{{ forloop.counter }}">{{ choice.choice_text }}</label>
+                            </div>
+                        {% endfor %}
+                    </div>
+            </p>
+
+        <input type="submit" value="Vote" class="btn btn-indigo btn-md btn-rounded">
+        </div>
+    </div>
+    </div>
+    </form>
+    </center>
+{#    </div>#}
+{#    <center><h1>{{ poll.text | title}}</h1>#}
+{#    <form action="" method="post">#}
+{#    {% csrf_token %}#}
+{#    <br>#}
+{#    <div class="row">#}
+{#        <div class="col-lg-4"></div>#}
+{#        {% for choice in poll.choice_set.all %}#}
+{#        <div class="col-sm-2">#}
+{#            <input type="radio" name="choice" id="choice{{ forloop.counter }}" value="{{ choice.id }}">#}
+{#            <label for="choice{{ forloop.counter }}">{{ choice.choice_text }}</label>#}
+{#        </div>#}
+{#        {% endfor %}#}
+{#    </div>#}
+{##}
+{#    <input type="submit" value="Vote" class="btn btn-indigo btn-md">#}
+{#    </form>#}
+{#    </center>#}
+{% endblock %}
