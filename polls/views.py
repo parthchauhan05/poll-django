@@ -16,8 +16,11 @@ def polls_detail(request, poll_id):
 
 
 def poll_vote(request, poll_id):
-    choice_id = request.POST['choice']
-    c = choice.objects.get(id=choice_id)
-    c.votes += 1
-    c.save()
-    return redirect('/polls/list/')
+    choice_id = request.POST.get('choice')
+    if choice_id:
+        c = choice.objects.get(id=choice_id)
+        p = c.question
+        c.votes += 1
+        c.save()
+        return render(request, 'polls/polls_results.html', {'poll': p})
+    return render(request, 'polls/polls_results.html', {'error': True})

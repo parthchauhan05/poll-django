@@ -1,0 +1,36 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block title %}Poll | {{ poll.text | capfirst }} {% endblock %}
+
+{% block content %}
+    <br>
+    <br>
+    <center>
+    {% if error %}
+    <h1>Error! No choice selected!</h1>
+    {% else %}
+    <div class="col-md-5">
+    <div class="card">
+        <div class="card-body">
+            <!-- Title -->
+            <h4 class="card-title">{{ poll.text | title}}</h4>
+            <!-- Text -->
+            <p class="card-text">
+                <div class="row">
+                    <div class="col-lg-4"></div>
+                        {% for choice in poll.choice_set.all %}
+                            <div class="col-sm-2">
+
+                                <label for="choice{{ forloop.counter }}">{{ choice.choice_text }} - {{ choice.votes }}</label>
+                            </div>
+                        {% endfor %}
+                    </div>
+            </p>
+
+        </div>
+    </div>
+    </div>
+    {% endif %}
+    </center>
+
+{% endblock %}
