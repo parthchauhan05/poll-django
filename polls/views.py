@@ -1,4 +1,5 @@
 from django.shortcuts import render, redirect
+from django.contrib import messages
 from .models import poll, choice
 from django.shortcuts import get_object_or_404
 
@@ -17,10 +18,11 @@ def polls_detail(request, poll_id):
 
 def poll_vote(request, poll_id):
     choice_id = request.POST.get('choice')
+    p = get_object_or_404(poll, id=poll_id)
     if choice_id:
         c = choice.objects.get(id=choice_id)
-        p = c.question
         c.votes += 1
         c.save()
-        return render(request, 'polls/polls_results.html', {'poll': p})
-    return render(request, 'polls/polls_results.html', {'error': True})
+    else:
+        messages.error(request, 'No choice found')
+    return render(request, 'polls/polls_results.html', {'poll': p})
